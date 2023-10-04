@@ -1,0 +1,80 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Logements{% endblock %}
+
+{% block body %}
+    <div class="navbar">{% include ('/navbar/index.html.twig') %}</div>
+    <div class="container">
+        <h1>Logements</h1>
+
+        <table class="table table-striped">
+            <tbody>
+            <tr>
+                <th>Id</th>
+                <td>{{ logement.id }}</td>
+            </tr>
+            <tr>
+                <th>Titre</th>
+                <td>{{ logement.titre }}</td>
+            </tr>
+            <tr>
+                <th>Description</th>
+                <td>{{ logement.description }}</td>
+            </tr>
+            <tr>
+                <th>Rating</th>
+                <td>{{ logement.rating }}</td>
+            </tr>
+            <tr>
+                <th>Capacity</th>
+                <td>{{ logement.capacity }}</td>
+            </tr>
+            <tr>
+                <th>Chambres</th>
+                <td>{{ logement.chambres }}</td>
+            </tr>
+            <tr>
+                <th>Douche</th>
+                <td>{{ logement.douche }}</td>
+            </tr>
+            <tr>
+                <th>Superficie</th>
+                <td>{{ logement.superficie }}</td>
+            </tr>
+            </tbody>
+        </table>
+
+        <div class="d-flex justify-content-between align-items-center">
+            <a class="btn btn-warning" href="{{ path('app_logements_edit', {'id': logement.id}) }}">Éditer</a>
+            {{ include('logements/_delete_form.html.twig') }}
+        </div>
+
+        <div class="mt-5 mb-5">
+            <h2>Ajouter des Images</h2>
+            <form method="post" action="{{ path('app_photos_new', {'id': logement.id}) }}" enctype="multipart/form-data">
+                <div class="d-flex">
+                    <button type="submit" class="btn btn-success">Ajouter</button>
+                </div>
+            </form>
+        </div>
+
+        <h2>Photos</h2>
+        <div class="row">
+            {% for photo in logement.idPhotos %}
+                <div class="col-md-4 mb-4">
+                    <div class="card">
+                        <img src="{{ vich_uploader_asset(photo, 'imageFile') }}" class="card-img-top"
+                             alt="Logement Photo" style="max-width: 100%; max-height: 200px;">
+                        <div class="card-body">
+                            <form method="post" action="{{ path('app_photos_delete', {'id': photo.id}) }}"
+                                  onsubmit="return confirm('Êtes-vous sûr de vouloir supprimer cette photo ?');">
+                                <input type="hidden" name="_token" value="{{ csrf_token('delete' ~ photo.id) }}">
+                                <button class="btn btn-danger btn-block">Supprimer</button>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            {% endfor %}
+        </div>
+    </div>
+{% endblock %}

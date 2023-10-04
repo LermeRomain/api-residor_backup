@@ -1,0 +1,81 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Hello NavbarController!{% endblock %}
+
+{% block body %}
+    <style>
+        .navbar {
+            margin-bottom: 5rem;
+        }
+
+        .navbar-brand:hover {
+            scale: 1.1;
+            transition-duration: 0.5s;
+        }
+
+        .nav-link:after {
+            background: none repeat scroll 0 0 transparent;
+            bottom: 0;
+            content: "";
+            display: block;
+            height: 2px;
+            left: 50%;
+            background: #fff;
+            transition: width 0.3s ease 0s, left 0.3s ease 0s;
+            width: 0;
+        }
+
+        .nav-link:hover:after {
+            width: 50%;
+            left: 0;
+        }
+
+    </style>
+
+    <nav class="navbar navbar-dark bg-dark fixed-top">
+        <div class="container-fluid">
+            <a class="navbar-brand" href={{ path('app_home') }}>
+                <h2>Residor Management</h2>
+            </a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="offcanvas"
+                    data-bs-target="#offcanvasDarkNavbar" aria-controls="offcanvasDarkNavbar">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="offcanvas offcanvas-end text-bg-dark" tabindex="-1" id="offcanvasDarkNavbar"
+                 aria-labelledby="offcanvasDarkNavbarLabel">
+                <div class="offcanvas-header">
+                    <button type="button" class="btn-close btn-close-white" data-bs-dismiss="offcanvas"
+                            aria-label="Close"></button>
+                </div>
+                <div class="offcanvas-body">
+                    <ul class="navbar-nav justify-content-end flex-grow-1 pe-3">
+                        <div class="container-fluid mb-5">
+                            {% if is_granted("ROLE_USER") %}
+                                <figure class="d-inline-flex">
+                                </figure>
+                            {% endif %}
+                        </div>
+                        {% if is_granted('ROLE_USER') %}
+                            <li class="nav-item h2">
+                                <a class="nav-link" href={{ path('app_logout') }}>Déconnexion</a>
+                            </li>
+                            <li class="nav-item h2">
+                                <a class="nav-link" href={{ path('app_logements_index') }}>Liste des logements</a>
+                            </li>
+                        {% else %}
+                            <li class="nav-item h2">
+                                <a class="nav-link" href={{ path('app_logements_index') }}>Liste des logements</a>
+                            </li>
+                            <li class="nav-item h2">
+                                <a class="nav-link active" aria-current="page" href={{ path('app_login') }}>Connexion</a>
+                            </li>
+                            <li class="nav-item h2">
+                                <a class="nav-link" href={{ path('app_register') }}>Inscription</a>
+                            </li>
+                        {% endif %}
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </nav>
+{% endblock %}

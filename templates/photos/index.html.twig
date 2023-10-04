@@ -1,0 +1,46 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Photos index{% endblock %}
+
+{% block body %}
+    <div class="navbar">{% include ('/navbar/index.html.twig') %}</div>
+    <div class="container">
+        <h1>Photos index</h1>
+
+        <table class="table">
+            <thead>
+            <tr>
+                <th>Id</th>
+                <th>ImageName</th>
+                <th>ImageSize</th>
+                <th>CreatedAt</th>
+                <th>UpdatedAt</th>
+                <th>logement</th>
+                <th>actions</th>
+            </tr>
+            </thead>
+            <tbody>
+            {% for photo in photos %}
+                <tr>
+                    <td>{{ photo.id }}</td>
+                    <td>{{ photo.imageName }}</td>
+                    <td>{{ photo.imageSize }}</td>
+                    <td>{{ photo.createdAt ? photo.createdAt|date('Y-m-d H:i:s') : '' }}</td>
+                    <td>{{ photo.updatedAt ? photo.updatedAt|date('Y-m-d H:i:s') : '' }}</td>
+                    <td>{{ photo.idLogements.id }}</td>
+                    <td>
+                        <a href="{{ path('app_photos_show', {'id': photo.id}) }}">show</a>
+                        <a href="{{ path('app_photos_edit', {'id': photo.id}) }}">edit</a>
+                    </td>
+                </tr>
+            {% else %}
+                <tr>
+                    <td colspan="6">no records found</td>
+                </tr>
+            {% endfor %}
+            </tbody>
+        </table>
+
+        <a href="{{ path('app_photos_new') }}">Create new</a>
+    </div>
+{% endblock %}
