@@ -33,6 +33,16 @@ class LogementsController extends AbstractController
             'logements' => $pagination,
         ]);
     }
+    #[Route('/misenavant', name: 'app_logements_mis_en_avant', methods: ['GET'])]
+    public function logementsMisEnAvant(EntityManagerInterface $entityManager): Response
+    {
+        $logementsMisEnAvant = $entityManager->getRepository(Logements::class)
+            ->findBy(['misenavant' => 1]);
+
+        return $this->render('logements/mis_en_avant.html.twig', [
+            'logements' => $logementsMisEnAvant,
+        ]);
+    }
 
     #[Route('/new', name: 'app_logements_new', methods: ['GET', 'POST'])]
     public function new(Request $request, EntityManagerInterface $entityManager): Response

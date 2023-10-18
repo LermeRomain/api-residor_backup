@@ -1,0 +1,36 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Logements index{% endblock %}
+
+{% block body %}
+    <div class="navbar">{% include ('/navbar/index.html.twig') %}</div>
+    <div class="container">
+        <h1>Logements Mis en Avant (Maximum 4)</h1>
+
+        <table class="table">
+            <thead>
+            <tr>
+                <th>Titre</th>
+                <th>Description</th>
+                <th>actions</th>
+            </tr>
+            </thead>
+            <tbody>
+            {% for logement in logements %}
+                <tr>
+                    <td>{{ logement.titre }}</td>
+                    <td>{{ logement.description }}</td>
+                    <td>
+                        <a href="{{ path('app_logements_show', {'id': logement.id}) }}" class="btn btn-primary">show</a>
+                        <a href="{{ path('app_logements_edit', {'id': logement.id}) }}" class="btn btn-warning">edit</a>
+                    </td>
+                </tr>
+            {% else %}
+                <tr>
+                    <td colspan="9">no records found</td>
+                </tr>
+            {% endfor %}
+            </tbody>
+        </table>
+    </div>
+{% endblock %}

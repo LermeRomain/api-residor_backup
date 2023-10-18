@@ -39,7 +39,7 @@ class Logements
     #[ORM\Column]
     private ?int $superficie = null;
 
-    #[ORM\OneToMany(mappedBy: 'id_logements', targetEntity: Photos::class)]
+    #[ORM\OneToMany(mappedBy: 'id_logements', targetEntity: Photos::class,cascade: ["persist", "remove"])]
     private Collection $id_photos;
 
     #[ORM\Column]
@@ -53,6 +53,18 @@ class Logements
 
     #[ORM\Column]
     private ?int $salledebains = null;
+
+    #[ORM\Column]
+    private ?int $lits = null;
+
+    #[ORM\Column(nullable: true)]
+    private ?int $misenavant = null;
+
+    #[ORM\Column(length: 255)]
+    private ?string $arrondissements = null;
+
+    #[ORM\Column]
+    private ?int $nbpieces = null;
 
     public function __construct()
     {
@@ -223,6 +235,54 @@ class Logements
     public function setSalledebains(int $salledebains): static
     {
         $this->salledebains = $salledebains;
+
+        return $this;
+    }
+
+    public function getLits(): ?int
+    {
+        return $this->lits;
+    }
+
+    public function setLits(int $lits): static
+    {
+        $this->lits = $lits;
+
+        return $this;
+    }
+
+    public function getMisenavant(): ?int
+    {
+        return $this->misenavant;
+    }
+
+    public function setMisenavant(?int $misenavant): static
+    {
+        $this->misenavant = $misenavant;
+
+        return $this;
+    }
+
+    public function getArrondissements(): ?string
+    {
+        return $this->arrondissements;
+    }
+
+    public function setArrondissements(string $arrondissements): static
+    {
+        $this->arrondissements = $arrondissements;
+
+        return $this;
+    }
+
+    public function getNbpieces(): ?int
+    {
+        return $this->nbpieces;
+    }
+
+    public function setNbpieces(int $nbpieces): static
+    {
+        $this->nbpieces = $nbpieces;
 
         return $this;
     }

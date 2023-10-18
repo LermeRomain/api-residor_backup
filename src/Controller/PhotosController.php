@@ -37,7 +37,7 @@ class PhotosController extends AbstractController
             $entityManager->persist($photo);
             $entityManager->flush();
 
-            return $this->redirectToRoute('app_photos_index', [], Response::HTTP_SEE_OTHER);
+            return $this->redirectToRoute('app_logements_index', [], Response::HTTP_SEE_OTHER);
         }
 
         return $this->render('photos/new.html.twig', [
@@ -64,7 +64,7 @@ class PhotosController extends AbstractController
         if ($form->isSubmitted() && $form->isValid()) {
             $entityManager->flush();
 
-            return $this->redirectToRoute('app_photos_index', [], Response::HTTP_SEE_OTHER);
+            return $this->redirectToRoute('app_logements_index', [], Response::HTTP_SEE_OTHER);
         }
 
         return $this->render('photos/edit.html.twig', [
@@ -81,6 +81,6 @@ class PhotosController extends AbstractController
             $entityManager->flush();
         }
 
-        return $this->redirectToRoute('app_photos_index', [], Response::HTTP_SEE_OTHER);
+        return $this->redirectToRoute('app_logements_index', [], Response::HTTP_SEE_OTHER);
     }
 }
