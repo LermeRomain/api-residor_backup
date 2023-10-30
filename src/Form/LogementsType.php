@@ -122,15 +122,6 @@ class LogementsType extends AbstractType
                     'class' => 'form-control',
                 ],
             ])
-            ->add('douche', IntegerType::class, [
-                'label' => 'Nombre de Salle de bain',
-                'label_attr' => [
-                    'class' => 'h3 mt-3',
-                ],
-                'attr' => [
-                    'class' => 'form-control',
-                ],
-            ])
             ->add('superficie', IntegerType::class, [
                 'label' => 'Superficie',
                 'label_attr' => [

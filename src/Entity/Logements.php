@@ -34,9 +34,6 @@ class Logements
     private ?int $chambres = null;
 
     #[ORM\Column]
-    private ?int $douche = null;
-
-    #[ORM\Column]
     private ?int $superficie = null;
 
     #[ORM\OneToMany(mappedBy: 'id_logements', targetEntity: Photos::class,cascade: ["persist", "remove"])]
@@ -53,9 +50,6 @@ class Logements
 
     #[ORM\Column]
     private ?int $salledebains = null;
-
-    #[ORM\Column]
-    private ?int $lits = null;
 
     #[ORM\Column(nullable: true)]
     private ?int $misenavant = null;
@@ -133,18 +127,6 @@ class Logements
     public function setChambres(int $chambres): static
     {
         $this->chambres = $chambres;
-
-        return $this;
-    }
-
-    public function getDouche(): ?int
-    {
-        return $this->douche;
-    }
-
-    public function setDouche(int $douche): static
-    {
-        $this->douche = $douche;
 
         return $this;
     }
@@ -235,18 +217,6 @@ class Logements
     public function setSalledebains(int $salledebains): static
     {
         $this->salledebains = $salledebains;
-
-        return $this;
-    }
-
-    public function getLits(): ?int
-    {
-        return $this->lits;
-    }
-
-    public function setLits(int $lits): static
-    {
-        $this->lits = $lits;
 
         return $this;
     }
